@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PolarisConfigurationWidget</class>
+ <widget class="QWidget" name="PolarisConfigurationWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>411</width>
+    <height>475</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>PolarisConfigurationWidget</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_3">
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>ROMS</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0">
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="referenceRomText"/>
+     </item>
+     <item row="0" column="2">
+      <widget class="QToolButton" name="referenceRomBtn">
+       <property name="maximumSize">
+        <size>
+         <width>27</width>
+         <height>22</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="probeRomText"/>
+     </item>
+     <item row="1" column="2">
+      <widget class="QToolButton" name="probeRomBtn">
+       <property name="text">
+        <string>...</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="needleRomText"/>
+     </item>
+     <item row="2" column="2">
+      <widget class="QToolButton" name="needleRomBtn">
+       <property name="text">
+        <string>...</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="pointerRomText"/>
+     </item>
+     <item row="3" column="2">
+      <widget class="QToolButton" name="pointerRomBtn">
+       <property name="text">
+        <string>...</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="maximumSize">
+        <size>
+         <width>91</width>
+         <height>22</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Reference</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>US Probe</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Needle</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Pointer</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QLabel" name="label_10">
+     <property name="text">
+      <string>CALIBRATION PARAMETERS</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="2">
+    <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,90,0">
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="probeCalibrationText"/>
+     </item>
+     <item row="0" column="2">
+      <widget class="QToolButton" name="probeCalibrationBtn">
+       <property name="text">
+        <string>...</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="needleCalibrationText"/>
+     </item>
+     <item row="1" column="2">
+      <widget class="QToolButton" name="needleCalibrationBtn">
+       <property name="text">
+        <string>...</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="pointerCalibrationText"/>
+     </item>
+     <item row="2" column="2">
+      <widget class="QToolButton" name="pointerCalibrationBtn">
+       <property name="text">
+        <string>...</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>US Probe</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_8">
+       <property name="text">
+        <string>Needle</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_9">
+       <property name="text">
+        <string>Pointer</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="5" column="1">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="okBtn">
+       <property name="maximumSize">
+        <size>
+         <width>93</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Ok</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label_6">
+       <property name="minimumSize">
+        <size>
+         <width>66</width>
+         <height>78</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>66</width>
+         <height>78</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Polaris Port</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="polarisPort">
+       <property name="minimumSize">
+        <size>
+         <width>73</width>
+         <height>22</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>73</width>
+         <height>22</height>
+        </size>
+       </property>
+       <item>
+        <property name="text">
+         <string>COM1</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>COM2</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>COM3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>COM4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>COM5</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>COM6</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>COM7</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>COM8</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>referenceRomBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>PolarisConfigurationWidget</receiver>
+   <slot>chooseReferenceRom()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>379</x>
+     <y>164</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>60</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>probeRomBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>PolarisConfigurationWidget</receiver>
+   <slot>chooseProbeRom()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>379</x>
+     <y>193</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>141</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>needleRomBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>PolarisConfigurationWidget</receiver>
+   <slot>chooseNeedleRom()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>379</x>
+     <y>222</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>180</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pointerRomBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>PolarisConfigurationWidget</receiver>
+   <slot>choosePointerRom()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>379</x>
+     <y>251</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>226</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>probeCalibrationBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>PolarisConfigurationWidget</receiver>
+   <slot>chooseProbeCalibration()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>379</x>
+     <y>344</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>226</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pointerCalibrationBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>PolarisConfigurationWidget</receiver>
+   <slot>choosePointerCalibration()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>379</x>
+     <y>402</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>okBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>PolarisConfigurationWidget</receiver>
+   <slot>ok()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>313</x>
+     <y>445</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>393</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>needleCalibrationBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>PolarisConfigurationWidget</receiver>
+   <slot>chooseNeedleCalibration()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>393</x>
+     <y>370</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>406</x>
+     <y>418</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>chooseReferenceRom()</slot>
+  <slot>chooseProbeRom()</slot>
+  <slot>chooseNeedleRom()</slot>
+  <slot>choosePointerRom()</slot>
+  <slot>chooseProbeCalibration()</slot>
+  <slot>chooseNeedleCalibration()</slot>
+  <slot>choosePointerCalibration()</slot>
+  <slot>ok()</slot>
+ </slots>
+</ui>

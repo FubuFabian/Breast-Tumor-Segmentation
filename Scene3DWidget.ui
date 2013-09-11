@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Scene3DWidget</class>
+ <widget class="QWidget" name="Scene3DWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1005</width>
+    <height>719</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>Scene3DWidget</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout" stretch="90,0">
+   <item>
+    <widget class="QWidget" name="Display" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMinAndMaxSize</enum>
+     </property>
+     <item>
+      <widget class="QPushButton" name="configTrackerBtn">
+       <property name="maximumSize">
+        <size>
+         <width>158</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Config Tracker</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="startTrackingBt">
+       <property name="maximumSize">
+        <size>
+         <width>158</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Start Tracking</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="initLoggetBt">
+       <property name="maximumSize">
+        <size>
+         <width>158</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Init Logger</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="maximumSize">
+        <size>
+         <width>158</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>US Probe Coords</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="usProbeX">
+       <property name="minimumSize">
+        <size>
+         <width>158</width>
+         <height>31</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>158</width>
+         <height>31</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="usProbeY">
+       <property name="maximumSize">
+        <size>
+         <width>158</width>
+         <height>31</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="usProbeZ">
+       <property name="maximumSize">
+        <size>
+         <width>158</width>
+         <height>31</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="maximumSize">
+        <size>
+         <width>158</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Needle Coords</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="needleX">
+       <property name="minimumSize">
+        <size>
+         <width>158</width>
+         <height>31</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>158</width>
+         <height>31</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="needleY">
+       <property name="maximumSize">
+        <size>
+         <width>158</width>
+         <height>31</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextEdit" name="needleZ">
+       <property name="maximumSize">
+        <size>
+         <width>158</width>
+         <height>31</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="openVolumeBtn">
+       <property name="maximumSize">
+        <size>
+         <width>158</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Open Volume</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="fourViewsBtn">
+       <property name="text">
+        <string>Four Views</string>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="quitBt">
+       <property name="maximumSize">
+        <size>
+         <width>158</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Quit</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>startTrackingBt</sender>
+   <signal>clicked()</signal>
+   <receiver>Scene3DWidget</receiver>
+   <slot>startTracking()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>992</x>
+     <y>102</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1004</x>
+     <y>104</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>quitBt</sender>
+   <signal>clicked()</signal>
+   <receiver>Scene3DWidget</receiver>
+   <slot>Quit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>992</x>
+     <y>678</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1004</x>
+     <y>620</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>configTrackerBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>Scene3DWidget</receiver>
+   <slot>configTracker()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>992</x>
+     <y>53</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1004</x>
+     <y>16</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>initLoggetBt</sender>
+   <signal>clicked()</signal>
+   <receiver>Scene3DWidget</receiver>
+   <slot>initLogger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>992</x>
+     <y>151</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1004</x>
+     <y>192</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>openVolumeBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>Scene3DWidget</receiver>
+   <slot>openVolume()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>992</x>
+     <y>586</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1004</x>
+     <y>591</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fourViewsBtn</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>Scene3DWidget</receiver>
+   <slot>seeFourViews(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>879</x>
+     <y>623</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>832</x>
+     <y>714</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>startTracking()</slot>
+  <slot>Quit()</slot>
+  <slot>configTracker()</slot>
+  <slot>initLogger()</slot>
+  <slot>openVolume()</slot>
+  <slot>seeFourViews(bool)</slot>
+ </slots>
+</ui>

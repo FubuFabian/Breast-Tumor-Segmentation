@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>661</width>
+    <height>660</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>340</width>
+    <height>300</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>25</width>
+    <height>25</height>
+   </size>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>8</horstretch>
+     <verstretch>6</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>320</width>
+     <height>240</height>
+    </size>
+   </property>
+   <property name="sizeIncrement">
+    <size>
+     <width>8</width>
+     <height>6</height>
+    </size>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="2" column="0">
+     <widget class="QTextEdit" name="textEdit">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>9</horstretch>
+        <verstretch>1</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="font">
+       <font>
+        <family>Courier New</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QWidget" name="imageWidget" native="true">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>13</horstretch>
+        <verstretch>10</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QSlider" name="imageSlider">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>661</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="actionAdd_Images_Folder"/>
+    <addaction name="actionOpen_Volume_Data"/>
+    <addaction name="actionOpen_Volume"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuProcess">
+    <property name="title">
+     <string>Process</string>
+    </property>
+    <widget class="QMenu" name="menuUS_Probe_Calibration">
+     <property name="title">
+      <string>US Probe Calibration</string>
+     </property>
+     <addaction name="actionCalibrate_Probe"/>
+     <addaction name="actionCheck_Calibration_Error"/>
+    </widget>
+    <widget class="QMenu" name="menuBreast_Tumor_Segmentation">
+     <property name="title">
+      <string>Breast Tumor Segmentation</string>
+     </property>
+     <addaction name="actionSegmentation_Training"/>
+     <addaction name="actionSegment_Image"/>
+    </widget>
+    <addaction name="actionCrop_Images"/>
+    <addaction name="menuUS_Probe_Calibration"/>
+    <addaction name="actionPivot_Calibration"/>
+    <addaction name="actionVolume_Reconstruction"/>
+    <addaction name="action3D_Scene_Display"/>
+    <addaction name="menuBreast_Tumor_Segmentation"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuProcess"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionAdd_Images_Folder">
+   <property name="text">
+    <string>Open Image(s)</string>
+   </property>
+   <property name="toolTip">
+    <string>Open Image or images</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionOpen_Volume_Data">
+   <property name="text">
+    <string>Open Volume Data</string>
+   </property>
+  </action>
+  <action name="actionVolume_Reconstruction">
+   <property name="text">
+    <string>Volume Reconstruction</string>
+   </property>
+  </action>
+  <action name="actionOpen_Volume">
+   <property name="text">
+    <string>Open Volume</string>
+   </property>
+  </action>
+  <action name="actionCrop_Images">
+   <property name="text">
+    <string>Crop Images</string>
+   </property>
+  </action>
+  <action name="action3D_Scene_Display">
+   <property name="text">
+    <string>3D Scene Display</string>
+   </property>
+  </action>
+  <action name="actionCalibrate_Probe">
+   <property name="text">
+    <string>Calibrate Probe</string>
+   </property>
+  </action>
+  <action name="actionCheck_Calibration_Error">
+   <property name="text">
+    <string>Check Calibration Error</string>
+   </property>
+  </action>
+  <action name="actionPivot_Calibration">
+   <property name="text">
+    <string>Pivot Calibration</string>
+   </property>
+  </action>
+  <action name="actionSegmentation_Training">
+   <property name="text">
+    <string>Segmentation Training</string>
+   </property>
+  </action>
+  <action name="actionSegment_Image">
+   <property name="text">
+    <string>Segment Image</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>actionQuit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>329</x>
+     <y>244</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionAdd_Images_Folder</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>addImages()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>329</x>
+     <y>244</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionCalibrate_Probe</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>probeCalibration()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>330</x>
+     <y>311</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>imageSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>displaySelectedImage(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>258</x>
+     <y>536</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>127</x>
+     <y>509</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionOpen_Volume_Data</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>openVolumeData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>330</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionVolume_Reconstruction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>volumeReconstruction()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>330</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionOpen_Volume</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>openVolume()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>330</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionCrop_Images</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>cropImages()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>330</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action3D_Scene_Display</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>display3DScene()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>330</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionCheck_Calibration_Error</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>checkCalibrationError()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>330</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionPivot_Calibration</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>pivotCalibration()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>330</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSegmentation_Training</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>segmentationTraining()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>330</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSegment_Image</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>segmentImage()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>330</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>addImages()</slot>
+  <slot>addMasks()</slot>
+  <slot>probeCalibration()</slot>
+  <slot>displaySelectedImage(int)</slot>
+  <slot>openVolumeData()</slot>
+  <slot>volumeReconstruction()</slot>
+  <slot>openVolume()</slot>
+  <slot>setSelectedOpacity(int)</slot>
+  <slot>cropImages()</slot>
+  <slot>display3DScene()</slot>
+  <slot>checkCalibrationError()</slot>
+  <slot>pivotCalibration()</slot>
+  <slot>segmentationTraining()</slot>
+  <slot>segmentImage()</slot>
+ </slots>
+</ui>

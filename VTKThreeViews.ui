@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>VTKThreeViews</class>
+ <widget class="QWidget" name="VTKThreeViews">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1050</width>
+    <height>367</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>VTKThreeViews</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QWidget" name="axialDisplay" native="true"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QSlider" name="axialSlider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="0" column="0">
+      <widget class="QWidget" name="sagittalDisplay" native="true"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QSlider" name="sagittalSlider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="gridLayout_3">
+     <item row="0" column="0">
+      <widget class="QWidget" name="coronalDisplay" native="true"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QSlider" name="coronalSlider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>axialSlider</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>VTKThreeViews</receiver>
+   <slot>axialSliderMove(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>270</x>
+     <y>425</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>276</x>
+     <y>439</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sagittalSlider</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>VTKThreeViews</receiver>
+   <slot>sagittalSliderMove(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>540</x>
+     <y>427</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>542</x>
+     <y>439</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>coronalSlider</sender>
+   <signal>sliderMoved(int)</signal>
+   <receiver>VTKThreeViews</receiver>
+   <slot>coronalSliderMove(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>990</x>
+     <y>425</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>990</x>
+     <y>442</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>axialSliderMove(int)</slot>
+  <slot>sagittalSliderMove(int)</slot>
+  <slot>coronalSliderMove(int)</slot>
+ </slots>
+</ui>

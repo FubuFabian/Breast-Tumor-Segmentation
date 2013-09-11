@@ -1,0 +1,218 @@
+# data file for the Fltk User Interface Designer (fluid)
+version 1.0300 
+header_name {.h} 
+code_name {.cxx}
+decl {\#include <QWidget>} {private local
+} 
+
+decl {\#include "PivotCalibration.h"} {private global
+} 
+
+decl {\#include <FL/Fl_File_Chooser.H>} {private local
+} 
+
+decl {class PivotCalibration;} {selected public global
+} 
+
+class PivotCalibrationUI {open : {public QWidget}
+} {
+  Function {PivotCalibrationUI()} {open
+  } {
+    Fl_Window m_mainWindow {
+      label {Pivot Calibration } open
+      private xywh {536 316 412 518} type Double color 53 labelsize 11 align 5 hide
+    } {
+      Fl_Group {} {open
+        private xywh {7 8 396 152} box FLAT_BOX color 53 align 5
+      } {
+        Fl_Choice m_comPortChoice {
+          label {COM Port:} open
+          tooltip {The COM port used by the tracker} xywh {85 16 90 25} box GTK_UP_BOX down_box UP_BOX color 52 selection_color 47 labelsize 12 when 1 textsize 11
+        } {
+          MenuItem {} {
+            label COM1
+            xywh {5 5 100 20}
+          }
+          MenuItem {} {
+            label COM2
+            xywh {5 5 100 20}
+          }
+          MenuItem {} {
+            label COM3
+            xywh {15 15 100 20}
+          }
+          MenuItem {} {
+            label COM4
+            xywh {25 25 100 20}
+          }
+          MenuItem {} {
+            label COM5
+            xywh {35 35 100 20}
+          }
+          MenuItem {} {
+            label COM6
+            xywh {45 45 100 20}
+          }
+          MenuItem {} {
+            label COM7
+            xywh {55 55 100 20}
+          }
+          MenuItem {} {
+            label COM8
+            xywh {65 65 100 20}
+          }
+        }
+        Fl_Button {} {
+          label {...}
+          callback {QString qtRomFile = QFileDialog::getOpenFileName(
+                this, tr("Choose File to Save Calibration"), QDir::currentPath()
+                ,tr("Rom (*.rom)"));
+
+QByteArray byteArray = qtRomFile.toUtf8();
+const char* romFile = byteArray.constData();
+
+this->m_SROMFileNameTextField->value(romFile);
+
+               
+
+//char *fileName = fl_file_chooser("Load SROM File", "SROM Files(*.rom,*.ROM)",NULL,0);
+//if(fileName!=NULL) { //file name is copied to the text field
+//  this->m_SROMFileNameTextField->value(fileName);
+//}}
+          private xywh {359 85 35 25} box GTK_UP_BOX color 52 labelsize 10
+          code0 {\#include <QString>}
+          code1 {\#include <QFileDialog>}
+          code2 {\#include <QFile>}
+          code3 {\#include <QTextStream>}
+        }
+        Fl_Input m_SROMFileNameTextField {
+          label {Optional SROM File:}
+          xywh {145 85 205 25} box BORDER_BOX labelsize 12 textsize 11
+        }
+        Fl_Button m_initializeButton {
+          label Initialize
+          callback {this->InitializeTrackingAndCalibration();}
+          private xywh {120 125 65 28} box GTK_UP_BOX color 52 labelsize 11
+        }
+        Fl_Value_Slider m_delaySlider {
+          label {Delay [sec]:}
+          tooltip {Delay before starting data acquisition} xywh {93 52 87 18} type Horizontal color 53 selection_color 54 labelsize 12 align 4 maximum 30 step 1 value 5 textsize 11
+        }
+        Fl_Value_Slider m_numberOfFramesSlider {
+          label {\# of frames:}
+          tooltip {Number of frames (transformations) to acquire} xywh {295 52 87 18} type Horizontal color 52 labelsize 12 align 4 minimum 300 maximum 1800 step 1 value 300 textsize 11
+        }
+        Fl_Choice m_toolPortChoice {
+          label {Tool port:}
+          xywh {292 18 95 22} box GTK_UP_BOX down_box UP_BOX color 52 selection_color 47 labelsize 12 textsize 11
+        } {
+          MenuItem {} {
+            label Wireless
+            xywh {0 0 100 20}
+          }
+          MenuItem {} {
+            label 1
+            xywh {0 0 100 20}
+          }
+          MenuItem {} {
+            label 2
+            xywh {10 10 100 20}
+          }
+          MenuItem {} {
+            label 3
+            xywh {20 20 100 20}
+          }
+          MenuItem {} {
+            label 4
+            xywh {30 30 100 20}
+          }
+          MenuItem {} {
+            label 5
+            xywh {40 40 100 20}
+          }
+          MenuItem {} {
+            label 6
+            xywh {50 50 100 20}
+          }
+          MenuItem {} {
+            label 7
+            xywh {60 60 100 20}
+          }
+          MenuItem {} {
+            label 8
+            xywh {70 70 100 20}
+          }
+          MenuItem {} {
+            label 9
+            xywh {80 80 100 20}
+          }
+          MenuItem {} {
+            label 10
+            xywh {90 90 100 20}
+          }
+          MenuItem {} {
+            label 11
+            xywh {100 100 100 20}
+          }
+          MenuItem {} {
+            label 12
+            xywh {110 110 100 20}
+          }
+        }
+        Fl_Button m_saveButton {
+          label Save
+          callback {this->SaveCalibration();}
+          xywh {225 124 65 28} box GTK_UP_BOX color 52 labelsize 11 deactivate
+        }
+      }
+      Fl_Box m_pivotCalibrationFLTKWidget {
+        label {Pivot Calibration Data}
+        xywh {7 180 396 320} box ROUNDED_FRAME color 52 align 5
+        code0 {\#include <igstkPivotCalibrationFLTKWidget.h>}
+        class {igstk::PivotCalibrationFLTKWidget}
+      }
+    }
+  }
+  Function {~PivotCalibrationUI()} {open
+  } {
+    code {delete m_mainWindow;} {}
+  }
+  Function {SaveCalibration()} {open return_type void
+  } {
+    code {this->pivotCalibration->SaveCalibration();} {}
+  }
+  Function {InitializeTrackingAndCalibration()} {open return_type void
+  } {
+    code {this->pivotCalibration->InitializeTrackingAndCalibration();} {}
+  }
+  Function {Show()} {open return_type void
+  } {
+    code {this->m_mainWindow->show();
+this->hasQuitted = false;} {}
+  }
+  Function {HasQuitted()} {open return_type bool
+  } {
+    code {return this->hasQuitted;} {}
+  }
+  Function {Quit()} {return_type void
+  } {
+    code {int i = fl_choice("Are you sure you want to quit?", NULL,"Yes","No"); 
+if ( i == 1 )
+  {
+  m_mainWindow->hide();
+  this->hasQuitted = true;
+  }
+else
+  {
+  return;
+  }} {}
+  }
+  decl {bool hasQuitted;} {private local
+  }
+  Function {SetCalibrator(PivotCalibration* calibrator)} {open return_type void
+  } {
+    code {this->pivotCalibration = calibrator;} {}
+  }
+  decl {PivotCalibration* pivotCalibration;} {public local
+  }
+} 

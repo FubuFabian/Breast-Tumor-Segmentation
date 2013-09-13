@@ -76,7 +76,7 @@ HistogramEqualizationFilter<TInputImage, TMaskImage, TOutputImage>
   {
       float temp = 
       (double)(cumulativeVector[i]-cumulativeVector[0])/(nPixels-cumulativeVector[0]);
-      equalizedVector[i] = round(temp*(this->m_HistogramSize[0]-1));
+      equalizedVector[i] = floor(temp*(this->m_HistogramSize[0]-1));
   }
   
 

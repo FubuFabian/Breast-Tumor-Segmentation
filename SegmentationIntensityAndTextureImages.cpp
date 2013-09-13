@@ -8,7 +8,7 @@
 #include <itkGradientAnisotropicDiffusionImageFilter.h>
 
 template<class TInputImage>
-void SegmentationIntensityAndTextureImages<TInputImage>::setInput(typename ImageType::Pointer image)
+void SegmentationIntensityAndTextureImages<TInputImage>::setInput(ImageType* image)
 {
     typename RescaleFilterType::Pointer normalizeFilter = RescaleFilterType::New();
     normalizeFilter->SetOutputMaximum(255);

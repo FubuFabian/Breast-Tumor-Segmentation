@@ -67,7 +67,8 @@ SET(AppSrcs main.cpp mainwindow.cpp QVTKImageWidget.cpp QVTKImageWidgetCommand.c
     igstkImageSpatialObjectVolumeRepresentation.txx QVTKVolumeSliceWidget.cpp
     VTKThreeViews.cpp ChangeVolumePropertiesWidget.cpp
     PivotCalibration.cpp PolarisConfigurationWidget.cpp SegmentationTrainingWidget.cpp
-    SegmentationIntensityAndTextureImages.cpp ImageSegmentationWidget.cpp)
+    SegmentationIntensityAndTextureImages.cpp ImageSegmentation.cpp
+    ImageSegmentationWidget.cpp)
     
 SET(AppHeaders mainwindow.h QVTKImageWidget.h QVTKImageWidgetCommand.h 
     ProbeCalibrationWidget.h Calibration.h VolumeReconstructionWidget.h
@@ -83,7 +84,8 @@ SET(AppHeaders mainwindow.h QVTKImageWidget.h QVTKImageWidgetCommand.h
     itkScalarToTextureRLImageFilter.h itkScalarImageToRunLengthFeaturesFilter.h 
     itkScalarImageToRunLengthMatrixFilter.h itkHistogramToRunLengthFeaturesFilter.h 
     itkHistogramEqualizationFilter.h SegmentationIntensityAndTextureImages.h
-    itkImageToVTKImageFilter.h itkVTKImageToImageFilter.h ImageSegmentationWidget.h)
+    itkImageToVTKImageFilter.h itkVTKImageToImageFilter.h ImageSegmentation.h
+    ImageSegmentationWidget.h)
     
 SET(AppUI mainwindow.ui ProbeCalibrationWidget.ui VolumeReconstructionWidget.ui 
     CropImagesWidget.ui Scene3DWidget.ui CheckCalibrationErrorWidget.ui

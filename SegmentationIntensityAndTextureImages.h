@@ -21,9 +21,9 @@ template<class TInputImage>
 class SegmentationIntensityAndTextureImages
 {
     
+	typedef TInputImage ImageType;
+
 public:
-    
-    typedef TInputImage ImageType;
     
     /**
      * Constructor
@@ -37,7 +37,7 @@ public:
      * Set input image
      * @param image 
      */
-    void setInput(typename ImageType::Pointer image);
+	void setInput(ImageType* image);
     
     /**
      * Computes the intensity image

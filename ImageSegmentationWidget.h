@@ -3,13 +3,14 @@
 
 #include "mainwindow.h"
 #include "QVTKImageWidget.h"
+#include "ImageSegmentation.h"
 
 #include <QWidget>
+
 #include <vtkSmartPointer.h>
 #include <vtkImageData.h>
 
 #include <itkImage.h>
-#include <itkCastImageFilter.h>
 
 namespace Ui {
     class ImageSegmentationWidget;
@@ -18,28 +19,30 @@ namespace Ui {
 class ImageSegmentationWidget : public QWidget
 {
     Q_OBJECT
-
-    typedef itk::Image<unsigned char, 2> ImageType;    
-    typedef itk::Image<float, 2> FloatImageType;
-    typedef itk::CastImageFilter<FloatImageType, ImageType> CastFilterType;
     
 public:
+
+	typedef itk::Image<unsigned char, 2> ImageType;
+
     explicit ImageSegmentationWidget(QWidget *parent = 0);
     ~ImageSegmentationWidget();
 
     void setImage(vtkSmartPointer<vtkImageData> image);
     
     void setMainWindow(MainWindow * mainWindow);
+	    
+    /**
+    * \brief get the cross point coordinates
+    */
+    void getCoordinates();
     
 private:
     
     Ui::ImageSegmentationWidget *ui;
+
+	ImageSegmentation * imageSegmentation;
     
     MainWindow * mainWindow;
-    
-    vtkSmartPointer<vtkImageData> vtkImage;
-    
-    FloatImageType::Pointer itkImage;
     
     vtkSmartPointer<vtkImageData> vtkProbabilityImage;
     
@@ -50,8 +53,6 @@ private:
     std::vector<ImageType::IndexType> contourPixels;
     
     QVTKImageWidget *displayWidget;
-    
-    FloatImageType::Pointer probabilityImage;
     
     std::vector<float> intensityProbs;
     
@@ -65,12 +66,7 @@ private:
     
     bool seedPointFlag;
     
-    ImageType::IndexType seedPoint;
-    
-    FloatImageType::Pointer convertToITKImage(vtkSmartPointer<vtkImageData> vtkImage);
-    
-    vtkSmartPointer<vtkImageData> convertToVTKImage(FloatImageType::Pointer itkImage);
-    
+	ImageType::IndexType seedPoint;
 
 private slots:
 
@@ -83,11 +79,6 @@ private slots:
     void segment();
 
     void save();
-    
-    /**
-    * \brief get the cross point coordinates
-    */
-    void getCoordinates();
     
     void newSeed();
 };

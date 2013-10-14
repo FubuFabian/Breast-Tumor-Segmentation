@@ -9,8 +9,6 @@
 #ifndef US_Probe_Calibration_OnMouseMovePtr_h
 #define US_Probe_Calibration_OnMouseMovePtr_h
 
-#include "QVTKImageWidget.h"
-
 #include <vtkCommand.h>
 #include <vtkPropPicker.h>
 #include <vtkCornerAnnotation.h>
@@ -20,11 +18,19 @@
 /*!
   The mouse motion callback, to pick the image and recover pixel values
 */
+template<class Widget>
 class QVTKImageWidgetCommand : public vtkCommand
 {
 public:
+    
+  typedef Widget WidgetType;
 
-  static QVTKImageWidgetCommand *New();
+  static QVTKImageWidgetCommand *New()
+  {
+        return new QVTKImageWidgetCommand;
+  }
+  
+  vtkTypeMacro(QVTKImageWidgetCommand, vtkCommand);
 
   QVTKImageWidgetCommand();
 
@@ -38,12 +44,22 @@ public:
    * \brief Set the 2d image widget related to this 2d event manager
    * \param[in] viewer QVTKImageWidget target 2D image
    */
-  void SetImageWidget(QVTKImageWidget* imageWidget);
+  void SetImageWidget(WidgetType* imageWidget);
 
   /**
    *
    */
-  virtual void Execute(vtkObject *, unsigned long vtkNotUsed(event), void *);
+  void Execute(vtkObject *, unsigned long vtkNotUsed(event), void *);
+  
+  /**
+   * \brief Set the qVTKImageWidgetFlag to true
+   **/
+  void setQVTKImageWidgetFlagOn();
+  
+  /**
+   * \brief Set the qVTKVolumeSliceWidgetFlag to true
+   **/
+  void setQVTKVolumeSliceWidgetFlagOn(); 
 
 private:
 
@@ -54,7 +70,19 @@ private:
   vtkSmartPointer<vtkCornerAnnotation> Annotation;
 
   /** The widget related to the mouse events */
-  QVTKImageWidget* ImageWidget;
+  WidgetType* ImageWidget;
+  
+  /** Indicates that the calling widget is a QVTKImageWidget */
+  bool qVTKImageWidgetFlag;
+  
+  /** Indicates that the calling widget is a QVTKVolumeSliceWidget */
+  bool qVTKVolumeSliceWidgetFlag; 
+  
+  
 };
+
+#ifndef VTK_MANUAL_INSTANTIATION
+#include "QVTKImageWidgetCommand.cpp"
+#endif
 
 #endif

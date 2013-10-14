@@ -8,9 +8,8 @@
 
 #include "QVTKImageWidget.h"
 #include "QVTKImageWidgetCommand.h"
-#include "CheckCalibrationErrorWidget.h"
-#include "VTKThreeViews.h"
 #include "ChangeVolumePropertiesWidget.h"
+#include "CheckCalibrationErrorWidget.h"
 #include "SegmentationTrainingWidget.h"
 
 #include <QSize.h>
@@ -28,6 +27,7 @@
 #include <vtkTextProperty.h>
 
 #include <vtkImageActor.h>
+#include <vtkInteractorStyle.h>
 #include <vtkInteractorStyleImage.h>
 #include <vtkImageFlip.h>
 
@@ -75,7 +75,15 @@ QVTKImageWidget::QVTKImageWidget(QWidget *parent) : QWidget(parent)
     this->checkCalibrationErrorFlag = false;
     
     this->segmentationTrainingFlag = false;
+    
+    this->volumeLoaded = false;
+    
+    this->threeViews = new VTKThreeViews();
+    
+    this->propertiesChanger = new ChangeVolumePropertiesWidget();
+    this->propertiesChanger->setQVTKImageWidget(this);
 }
+
 
 
 QVTKImageWidget::~QVTKImageWidget()
@@ -355,12 +363,10 @@ void QVTKImageWidget::setAndDisplayVolume(QString volumeFilename)
     volume->SetOrigin(0,0,0);
     volume->SetProperty(volumeProperty);
     volume->Update();
-
-    VTKThreeViews * threeViews = new VTKThreeViews(volumeData);
+    
+    threeViews->setVolumeData(volumeData);
     threeViews->show();
-
-    ChangeVolumePropertiesWidget * propertiesChanger = new ChangeVolumePropertiesWidget();
-    propertiesChanger->setQVTKImageWidget(this);
+    
     propertiesChanger->show();
 
     this->displayVolume(volume);
@@ -406,14 +412,12 @@ void QVTKImageWidget::setAndDisplayVolume(vtkSmartPointer<vtkImageData> volumeDa
     volume->SetProperty(volumeProperty);
     volume->Update();
 
-	VTKThreeViews * threeViews = new VTKThreeViews(volumeData);
-	threeViews->show();
+    threeViews->setVolumeData(volumeData);
+    threeViews->show();
 
-	ChangeVolumePropertiesWidget * propertiesChanger = new ChangeVolumePropertiesWidget();
-	propertiesChanger->setQVTKImageWidget(this);
-	propertiesChanger->show();
+    propertiesChanger->show();
     
-	this->displayVolume(volume);
+    this->displayVolume(volume);
 
 }
 
@@ -461,11 +465,12 @@ void QVTKImageWidget::initPicker()
     imageViewer->GetRenderer()->AddViewProp(cornerAnnotation);
 
 	    //listen to MouseMoveEvents invoked by the interactor's style
-    vtkSmartPointer<QVTKImageWidgetCommand> callback =
-            vtkSmartPointer<QVTKImageWidgetCommand>::New();
+    vtkSmartPointer<QVTKImageWidgetCommand<QVTKImageWidget> > callback =
+            vtkSmartPointer<QVTKImageWidgetCommand<QVTKImageWidget> >::New();
     callback->SetImageWidget(this);
     callback->SetAnnotation(cornerAnnotation);
     callback->SetPicker(propPicker);
+    callback->setQVTKImageWidgetFlagOn();
 
     vtkSmartPointer<vtkInteractorStyleImage> imageStyle = vtkSmartPointer<vtkInteractorStyleImage>::New();
     imageViewer->GetRenderWindow()->GetInteractor()->SetInteractorStyle(imageStyle);
@@ -559,7 +564,7 @@ void QVTKImageWidget::displayVolumeImages(std::vector< vtkSmartPointer<vtkImageD
     }
 
     renderer = vtkSmartPointer<vtkRenderer>::New();
-    renderer->SetBackground(1, 1, 1);
+    renderer->SetBackground(183.0/255.0,197.0/255.0,253.0/255.0);
 
     //Adding Image Actors to renderer
 	std::cout<<std::endl;
@@ -629,16 +634,29 @@ void QVTKImageWidget::displaySelectedImage(int idx)
 void QVTKImageWidget::displayVolume(vtkSmartPointer<vtkVolume> volume)
 {
     renderer = vtkSmartPointer<vtkRenderer>::New();
-    renderer->SetBackground(1, 1, 1);
-	renderer->AddVolume(volume);
+    renderer->SetBackground(183.0/255.0,197.0/255.0,253.0/255.0);
+    renderer->AddVolume(volume);
+    renderer->GetActiveCamera()->SetFocalPoint(volume->GetCenter());
+    renderer->GetActiveCamera()->Roll(90);
+    
+    double cameraPos[3];
+    cameraPos[0] = volume->GetCenter()[0] + volume->GetMaxXBound() + 30;
+    cameraPos[1] = volume->GetCenter()[1];
+    cameraPos[2] = volume->GetCenter()[2];
+    
+    renderer->GetActiveCamera()->SetPosition(cameraPos);
 
     renwin = vtkSmartPointer<vtkRenderWindow>::New();
     renwin->AddRenderer(renderer);
-
+    
     qvtkWidget->SetRenderWindow(renwin);
-	std::cout<<std::endl;
-	std::cout<<"Displaying volume"<<std::endl<<std::endl;
+    std::cout<<std::endl;
+    std::cout<<"Displaying volume"<<std::endl<<std::endl;
     renwin->Render();
+    
+    //MainWindow->setVolumeLoaded(true);
+    
+    this->volumeLoaded = true;
 }
 
 void QVTKImageWidget::setImageProperties(bool verbose)
@@ -723,6 +741,12 @@ void QVTKImageWidget::setYPicked(int yPosition)
     this->yPicked = yPosition;
 }
 
+void QVTKImageWidget::setPickedCoordinates(int xPosition, int yPosition)
+{
+    this->xPicked = xPosition;
+    this->yPicked = yPosition;
+}
+
 void QVTKImageWidget::setVolumeData(vtkSmartPointer<vtkImageData> volumeData)
 {
     this->volumeData = volumeData;
@@ -764,6 +788,21 @@ int QVTKImageWidget::getImageDisplayedIndex()
     return imageDisplayedIndex;
 }
 
+vtkSmartPointer<vtkImageData> QVTKImageWidget::getVolume()
+{
+    return volumeData;
+}
+
+VTKThreeViews* QVTKImageWidget::getVTKThreeViews()
+{
+    return threeViews;
+}
+
+bool QVTKImageWidget::getVolumeLoaded()
+{
+    return volumeLoaded;
+}
+
 void QVTKImageWidget::setCalibrationErrorWidget(CheckCalibrationErrorWidget* calibrationErrorWidget)
 {
 	this->calibrationErrorWidget = calibrationErrorWidget;
@@ -794,3 +833,4 @@ void QVTKImageWidget::setSegmentationTrainingFlag()
     this->checkCalibrationErrorFlag = false;
     this->segmentationTrainingFlag = true;
 }
+

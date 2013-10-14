@@ -51,6 +51,8 @@ public:
      */
     typename ImageType::Pointer getTextureImage();
     
+    void setTimeStep(float timeStep);
+    
 private:
     
     /**
@@ -63,6 +65,8 @@ private:
      */
     typedef typename itk::RescaleIntensityImageFilter<ImageType, ImageType> 
                                                               RescaleFilterType;
+    
+    float timeStep;
     
     
 };

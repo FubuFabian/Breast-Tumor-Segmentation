@@ -1,21 +1,24 @@
 #include "VTKThreeViews.h"
 #include "ui_VTKThreeViews.h"
+#include "VolumeSegmentationWidget.h"
 
 #include <QVBoxLayout>
+
 #include <vtkMetaImageReader.h>
 #include <vtkImageData.h>
+#include <vtkEventQtSlotConnect.h>
 
 
-VTKThreeViews::VTKThreeViews( vtkSmartPointer<vtkImageData> volumeData, QWidget *parent) :
+VTKThreeViews::VTKThreeViews(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::VTKThreeViews)
 {
-
 	ui->setupUi(this);
 	this->setAttribute(Qt::WA_DeleteOnClose);
 
 	this->axialDisplayWidget = new QVTKVolumeSliceWidget();
-
+        this->axialDisplayWidget->setVTKThreeViews(this);
+        
 	QVBoxLayout * axialLayout = new QVBoxLayout;
 	axialLayout->setContentsMargins(0, 0, 0, 0);
 	axialLayout->setSpacing(0);
@@ -23,6 +26,7 @@ VTKThreeViews::VTKThreeViews( vtkSmartPointer<vtkImageData> volumeData, QWidget 
 	ui->axialDisplay->setLayout(axialLayout);
 
 	this->sagittalDisplayWidget = new QVTKVolumeSliceWidget();
+        this->sagittalDisplayWidget->setVTKThreeViews(this);
 
 	QVBoxLayout * sagittalLayout = new QVBoxLayout;
 	sagittalLayout->setContentsMargins(0, 0, 0, 0);
@@ -31,14 +35,101 @@ VTKThreeViews::VTKThreeViews( vtkSmartPointer<vtkImageData> volumeData, QWidget 
 	ui->sagittalDisplay->setLayout(sagittalLayout);
 
 	this->coronalDisplayWidget = new QVTKVolumeSliceWidget();
+        this->coronalDisplayWidget->setVTKThreeViews(this);
+              
 
 	QVBoxLayout * coronalLayout = new QVBoxLayout;
 	coronalLayout->setContentsMargins(0, 0, 0, 0);
 	coronalLayout->setSpacing(0);
 	coronalLayout->QLayout::addWidget(coronalDisplayWidget);
 	ui->coronalDisplay->setLayout(coronalLayout);
+        
+        this->pickedCoordinates = new std::vector<int>;
+        this->pickedCoordinates->reserve(3);
+        this->pickedCoordinates->assign(3,0);
+    
+}
 
-	int size[3];
+VTKThreeViews::~VTKThreeViews()
+{
+    delete ui;
+}
+
+void VTKThreeViews::axialSliderMove(int slice)
+{
+	axialDisplayWidget->displayVolumeSlice(slice);
+}
+
+void VTKThreeViews::axialRotate()
+{
+    this->axialDisplayWidget->rotateCamera();
+}
+
+void VTKThreeViews::axialHorizontalFlip()
+{
+    this->axialDisplayWidget->setHorizontalFlipFlag();
+}
+
+void VTKThreeViews::axialVerticalFlip()
+{
+    this->axialDisplayWidget->setVerticalFlipFlag();
+}
+
+void VTKThreeViews::sagittalSliderMove(int slice)
+{
+	sagittalDisplayWidget->displayVolumeSlice(slice);
+}
+
+void VTKThreeViews::sagittalRotate()
+{
+    this->sagittalDisplayWidget->rotateCamera();
+}
+
+void VTKThreeViews::sagittalHorizontalFlip()
+{
+    this->sagittalDisplayWidget->setHorizontalFlipFlag();
+}
+
+void VTKThreeViews::sagittalVerticalFlip()
+{
+    this->sagittalDisplayWidget->setVerticalFlipFlag();
+}
+
+void VTKThreeViews::coronalSliderMove(int slice)
+{
+	coronalDisplayWidget->displayVolumeSlice(slice);	
+}
+
+void VTKThreeViews::coronalRotate()
+{
+    this->coronalDisplayWidget->rotateCamera();
+}
+
+void VTKThreeViews::coronalHorizontalFlip()
+{
+    this->coronalDisplayWidget->setHorizontalFlipFlag();
+}
+
+void VTKThreeViews::coronalVerticalFlip()
+{
+    this->coronalDisplayWidget->setVerticalFlipFlag();
+}
+
+void VTKThreeViews::setPickedCoordinates(int xPicked, int yPicked, int zPicked)
+{
+    this->pickedCoordinates->at(0) = xPicked;
+    this->pickedCoordinates->at(1) = yPicked;
+    this->pickedCoordinates->at(2) = zPicked;
+}
+
+std::vector<int>* VTKThreeViews::getPickedCoordinates()
+{
+    return pickedCoordinates;
+}
+
+void VTKThreeViews::setVolumeData(vtkSmartPointer<vtkImageData> volumeData)
+{
+    int size[3];
 	
 	volumeData->GetDimensions(size);
 	
@@ -74,27 +165,33 @@ VTKThreeViews::VTKThreeViews( vtkSmartPointer<vtkImageData> volumeData, QWidget 
 	sagittalDisplayWidget->displayVolumeSlice(centerSlice[0]);
 	coronalDisplayWidget->displayVolumeSlice(centerSlice[1]);
 	axialDisplayWidget->displayVolumeSlice(centerSlice[2]);
+}
+
+void VTKThreeViews::connectWithVolumeSegmentation(VolumeSegmentationWidget* volumeSegmentation)
+{
     
+    axialConnections = vtkSmartPointer<vtkEventQtSlotConnect>::New();
+    
+    axialConnections->Connect(axialDisplayWidget->getQVTKWidget()->GetRenderWindow()->GetInteractor(),
+                           vtkCommand::LeftButtonPressEvent,
+                           volumeSegmentation,
+                           SLOT(getCoordinates()));
+    
+    sagittalConnections = vtkSmartPointer<vtkEventQtSlotConnect>::New();
+    
+    sagittalConnections->Connect(sagittalDisplayWidget->getQVTKWidget()->GetRenderWindow()->GetInteractor(),
+                           vtkCommand::LeftButtonPressEvent,
+                           volumeSegmentation,
+                           SLOT(getCoordinates()));
+    
+    coronalConnections = vtkSmartPointer<vtkEventQtSlotConnect>::New();
+    
+    coronalConnections->Connect(coronalDisplayWidget->getQVTKWidget()->GetRenderWindow()->GetInteractor(),
+                           vtkCommand::LeftButtonPressEvent,
+                           volumeSegmentation,
+                           SLOT(getCoordinates()));
+        
 }
 
-VTKThreeViews::~VTKThreeViews()
-{
-    delete ui;
-}
 
-void VTKThreeViews::axialSliderMove(int slice)
-{
-	axialDisplayWidget->displayVolumeSlice(slice);
-}
-
-void VTKThreeViews::sagittalSliderMove(int slice)
-{
-	sagittalDisplayWidget->displayVolumeSlice(slice);
-}
-
-
-void VTKThreeViews::coronalSliderMove(int slice)
-{
-	coronalDisplayWidget->displayVolumeSlice(slice);	
-}
 

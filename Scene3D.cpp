@@ -341,7 +341,8 @@ void Scene3D::addVolumeToScene(std::string volumeFilename)
 	vtkSmartPointer<vtkImageData> volumeData = reader->GetOutput();
 	double * usVolumePosition = volumeData->GetOrigin();
 
-	VTKThreeViews * threeViews = new VTKThreeViews(volumeData);
+	VTKThreeViews * threeViews = new VTKThreeViews();
+        threeViews->setVolumeData(volumeData);
 	threeViews->show();
 
 	vtkSmartPointer<vtkImageChangeInformation> changeInformation = vtkSmartPointer<vtkImageChangeInformation>::New();

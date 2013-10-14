@@ -1,8 +1,6 @@
 #ifndef QVTKVOLUMESLICEWIDGET_H
 #define QVTKVOLUMESLICEWIDGET_H
 
-#endif // QVTKVOLUMESLICEWIDGET_H
-
 #include <QtGui>
 #include <QWidget>
 #include <QVTKWidget.h>
@@ -14,12 +12,15 @@
 #include <vtkImageReslice.h>
 #include <vtkImageActor.h>
 #include <vtkInteractorStyleImage.h>
+#include <vtkCornerAnnotation.h>
 
 //!Display volume Slices
 /*!
   This class provides the funtions to display on a vtkImageViewer2 a slice of a volume in
   the defined view (axial, sagittal or coronal)
 */
+
+class VTKThreeViews;
 
 class QVTKVolumeSliceWidget : public QWidget {
     Q_OBJECT    
@@ -59,9 +60,67 @@ public:
 	void setCoronalView();
 
 	/**
-	Sets the coronal plane as the slicing plane
+	Sets the sagittal plane as the slicing plane
 	**/
 	void setSagittalView();
+        
+        /**
+	Sets the oblique plane as the slicing plane
+	**/
+        void setObliqueView();
+        
+            /**
+     * \brief Set the mouse x coordinate position when mouse left button is pressed
+     */
+    void setXPicked(int xPosition);
+    
+    /**
+     * \brief Set the mouse y coordinate position when mouse left button is pressed
+     */
+    void setYPicked(int yPosition);
+   
+    /**
+     * \brief Set the mouse x and y coordinates position when mouse left button is pressed
+     */
+    void setPickedCoordinates(int xPosition, int yPosition);
+    
+        /**
+     * \brief Return this widget image viewer
+     * \param[out] imageViewer vtkImageViewer2 target 2D image.
+     */
+    vtkSmartPointer<vtkImageViewer2> getImageViewer();
+    
+    /**
+     * \brief Rotate the camera 90 degrees
+     */
+    void rotateCamera();
+    
+    /**
+     * \brief Flip the slice image 180 degrees horizontally
+     */
+    vtkSmartPointer<vtkImageData> imageHorizontalFlip(vtkSmartPointer<vtkImageData> image);
+    
+    /**
+     * \brief Flip the slice image 180 degrees vertically
+     */
+    vtkSmartPointer<vtkImageData> imageVerticalFlip(vtkSmartPointer<vtkImageData> image); 
+    
+    /**
+     * \brief Change the horizontalFlilFlag value
+     */
+    void setHorizontalFlipFlag();
+    
+    /**
+     * \brief Change the verticalFlilFlag value
+     */
+    void setVerticalFlipFlag();
+    
+    /**
+     * \brief Set the VTKThreeViews
+     */
+    void setVTKThreeViews(VTKThreeViews * vtkThreeViews);
+    
+    QVTKWidget* getQVTKWidget();
 
 private:
 
@@ -114,6 +173,11 @@ private:
 	Data for the sagittal plane
 	**/
 	static const double sagittalElements[16];
+        
+        /**
+	Data for the oblique plane
+	**/
+	static const double obliqueElements[16];
 
 	/**
 	Indicates if the volume is going to be sliced in the axial plane
@@ -126,10 +190,25 @@ private:
 	bool coronalView;
 
 	/**
-	Indicates if the volume is going to be sliced in the sagital plane
+	Indicates if the volume is going to be sliced in the sagittal plane
 	**/
 	bool sagittalView;
 
+        /**
+	Indicates if the volume is going to be sliced in the oblique plane
+	**/
+        bool obliqueView;
+        
+        /**
+	Indicates if the sliced image is flipped horizontally
+	**/
+        bool horizontalFlipFlag;
+        
+        /**
+	Indicates if the sliced image is flipped vertically
+	**/
+        bool verticalFlipFlag;
+        
 	/**
 	Contains the voxel size of the volumeData
 	**/
@@ -139,5 +218,33 @@ private:
 	Contains the origin of the volumeData
 	**/
 	double origin[3];
+        
+        /**
+	Contains the dimensions of the volumeData
+	**/
+        int dimensions[3];
+        
+            /** current x coordinate of mouse position over the image */
+    int xPicked;
+    
+    /** current y coordinate of mouse position over the image */
+    int yPicked;
+    
+    /** current z coordinate of mouse position over the image */
+    int zPicked;
+    
+    /** the slice of the volume */
+    int slice;
+    
+    /** The VTKThreeViews containing the widget */
+    VTKThreeViews * threeViews;
+    
+    /** the corner annotation that displays the picked coordinates */
+    vtkSmartPointer< vtkCornerAnnotation > cornerAnnotation;
+    
+    /** initialize the coordinate picker */
+        void initPicker();
 
 };
+
+#endif // QVTKVOLUMESLICEWIDGET_H

@@ -1,9 +1,10 @@
-#ifndef IMAGESEGMENTATIONWIDGET_H
-#define IMAGESEGMENTATIONWIDGET_H
+#ifndef VOLUMESEGMENTATIONWIDGET_H
+#define VOLUMESEGMENTATIONWIDGET_H
 
 #include "mainwindow.h"
 #include "QVTKImageWidget.h"
-#include "ImageSegmentation.h"
+#include "VolumeSegmentation.h"
+#include "VTKThreeViews.h"
 
 #include <QWidget>
 
@@ -13,57 +14,61 @@
 #include <itkImage.h>
 
 namespace Ui {
-    class ImageSegmentationWidget;
+    class VolumeSegmentationWidget;
 }
 
-//!User interface for image segmentation
+//!User interface for volume segmentation
 /*!
  *This class is the user interface for segmenting a breast tumor from
- *2D ultrasound image using the class ImageSegmentation.h
+ *3D ultrasound image using the class VolumeSegmentation.h
 */
-class ImageSegmentationWidget : public QWidget
+class VolumeSegmentationWidget : public QWidget
 {
     Q_OBJECT
     
 public:
     
-    typedef itk::Image<unsigned char, 2> ImageType; ///< itk 2D image type
+    typedef itk::Image<unsigned char, 3> VolumeType; ///< itk 3D image type
 
     /**
      * \brief class contructor
      * @param parent
      */
-    explicit ImageSegmentationWidget(QWidget *parent = 0);
-    ~ImageSegmentationWidget();
+    explicit VolumeSegmentationWidget(QWidget *parent = 0);
+    ~VolumeSegmentationWidget();
 
     /**
      * \brief set the ultrasoun image
      * @param a vtk image
      */
-    void setImage(vtkSmartPointer<vtkImageData> image);
+    void setVolume(vtkSmartPointer<vtkImageData> volume);
     
     /**
      * \brief Set the calling main window
      * @param mainWindow
      */
     void setMainWindow(MainWindow * mainWindow);
+    
+    void setVTKThreeViews(VTKThreeViews* threeViews);
 	   
     
 private:
     
-    Ui::ImageSegmentationWidget *ui; ///< the user interface
+    Ui::VolumeSegmentationWidget *ui; ///< the user interface
 
-    ImageSegmentation * imageSegmentation; ///< has all the functions for image segmentation
+    VolumeSegmentation * volumeSegmentation; ///< has all the functions for volume segmentation
     
     MainWindow * mainWindow; ///< the calling main window
     
-    vtkSmartPointer<vtkImageData> vtkProbabilityImage; ///< the probability image
+    VTKThreeViews* threeViews;
     
-    vtkSmartPointer<vtkImageData> vtkRegionGrowingImage; ///< the region growing image
+    vtkSmartPointer<vtkImageData> vtkProbabilityVolume; ///< the probability volume
     
-    vtkSmartPointer<vtkImageData> vtkContourImage; ///< the tumor contour image
+    vtkSmartPointer<vtkImageData> vtkRegionGrowingVolume; ///< the region growing volume
     
-    std::vector<ImageType::IndexType> contourPixels; ///< the tumor contour pixels coordinates
+    vtkSmartPointer<vtkImageData> vtkContourVolume; ///< the tumor contour volume
+    
+    std::vector<VolumeType::IndexType> contourPixels; ///< the tumor contour pixels coordinates
     
     QVTKImageWidget *displayWidget; ///< the display widget
     
@@ -75,11 +80,11 @@ private:
     
     bool textureProbsFlag; ///< indicates if the texture probability function is loaded
     
-    bool probabilityImageFlag; ///< indicates if the probability image has been computed
+    bool probabilityVolumeFlag; ///< indicates if the probability volume has been computed
     
     bool seedPointFlag; ///< indicates if the seed piont has been selected
     
-    ImageType::IndexType seedPoint;  ///< the region growing seed point
+    VolumeType::IndexType seedPoint;  ///< the region growing seed point
 
 private slots:
 
@@ -94,17 +99,17 @@ private slots:
     void loadTextureProbs();
     
     /**
-     * \brief calls the ImageSegmentation.h function to compute the proability image
+     * \brief calls the VolumeSegmentation.h function to compute the proability volume
      */
     void computeProbability();
 
     /**
-     * \brief calls the ImageSegmentation.h function to segment the image
+     * \brief calls the VolumeSegmentation.h function to segment the volume
      */
     void segment();
 
     /**
-     * \brief saves the probability image, region growing image, contour image
+     * \brief saves the probability volume, region growing volume, contour volume
      * and the contour coordinates
      */
     void save();

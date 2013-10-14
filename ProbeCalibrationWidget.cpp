@@ -233,7 +233,7 @@ void ProbeCalibrationWidget::getCoordinates()
        
 		std::cout<<"Picked Pixel for Image "<<row<< ": "<<x<<","<<y<<std::endl;
 
-		coords[row][0] = x;
+	coords[row][0] = x;
         coords[row][1] = y;
     }
     else

@@ -47,9 +47,11 @@
 #include <vtkBMPReader.h>
 
 #include "vtkTracerInteractorStyle.h"
+#include "VTKThreeViews.h"
 
 class CheckCalibrationErrorWidget;
 class SegmentationTrainingWidget;
+class ChangeVolumePropertiesWidget;
 
 typedef itk::RGBPixel< unsigned char > RGBPixelType;
 typedef itk::Image< unsigned char > ImageType;
@@ -218,6 +220,11 @@ public:
      * \brief Set the mouse y coordinate position when mouse left button is pressed
      */
     void setYPicked(int yPosition);
+    
+    /**
+     * \brief Set the mouse x and y coordinates position when mouse left button is pressed
+     */
+    void setPickedCoordinates(int xPosition, int yPosition);
 
     /**
      * \brief Set the data of the display volume
@@ -282,6 +289,24 @@ public:
     /** Tracer style for the segmentation training widget*/
     vtkSmartPointer<vtkTracerInteractorStyle<SegmentationTrainingWidget> > 
             segmentationTrainingStyle;
+    
+    /**
+     * \brief return the three views widget for volume
+     * @return VTKThreeViews pointer 
+     */
+    VTKThreeViews * getVTKThreeViews();
+    
+    /**
+     * \brief get the displayed Volume
+     * @return vtkImageData with the volume data
+     */
+    vtkSmartPointer<vtkImageData> getVolume();
+    
+    /**
+     * \Brief return volumeLoadedFlag;
+     * @return 
+     */
+    bool getVolumeLoaded();
 
 private:    
 
@@ -319,6 +344,7 @@ private:
 
     vtkImageActor* imageActor;
     
+    /** the opacity peak point*/
     int opacityPoint;
     
     /** \brief A vtkImageData Vector for keep the image references when load an 
@@ -411,10 +437,6 @@ private:
     vnl_matrix<double> computeTransformation(vnl_vector<double> quaternion,
                                                         vnl_vector<double> translation,
 							std::vector<double> calibration);
-
-
-    
-    /* -------- necesary vtk objects to display an image ------ */
     
     /** the image viewer for display images */
     vtkSmartPointer<vtkImageViewer2> imageViewer;
@@ -431,6 +453,12 @@ private:
     bool segmentationTrainingFlag; ///<Flag to train the segmentation
     
     bool pickerFlag; ///<Flag to pick a pixel
+        
+    VTKThreeViews * threeViews; ///<The trhee views to visualize sagittal, coronal and axial slices of the volume
+    
+    ChangeVolumePropertiesWidget * propertiesChanger; ///<Changes the properties of the displayed volume
+    
+    bool volumeLoaded; ///< Indicates of a volume has been loaded
 
 };
 

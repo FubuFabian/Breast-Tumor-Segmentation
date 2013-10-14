@@ -34,7 +34,6 @@ public:
    */
   QVTKImageWidget* getDisplayWidget();
 
-
 private:
 
   Ui::MainWindow *ui;
@@ -64,10 +63,9 @@ private:
    */
   QVTKImageWidget *displayWidget;
 
-
-  bool imageLoaded;
+  bool imageLoaded; ///<Indicates if an image has been loaded
   
-  vtkSmartPointer<vtkEventQtSlotConnect> Connections;
+  vtkSmartPointer<vtkEventQtSlotConnect> Connections; ///<Connects different widget through actions and slots
 
 private slots:
 
@@ -138,6 +136,11 @@ private slots:
    * Segment breast tumor from 2D Ultrasound Image
    */
   void segmentImage();
+  
+  /**
+   * Segment breast tumor from 3D Ultrasound Image
+   */
+  void segmentVolume();
 };
 
 

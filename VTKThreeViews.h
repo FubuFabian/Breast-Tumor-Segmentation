@@ -9,6 +9,8 @@
 
 #include <vtkEventQtSlotConnect.h>
 
+class VolumeSegmentationWidget;
+
 namespace Ui {
 class VTKThreeViews;
 }
@@ -29,12 +31,38 @@ public:
 	Constructor, it initialize the QVTKVolumeSliceWidgets to display the three views  
 	[in] vtkImageData containing the 3D image data to display
 	*/
-    explicit VTKThreeViews( vtkSmartPointer<vtkImageData> = NULL, QWidget *parent = 0);
+    explicit VTKThreeViews(QWidget *parent = 0);
 
 	/**
 	Destructor
 	**/
     ~VTKThreeViews();
+    
+    /**
+     * \brief set the user picked coordinates when clicking in a viewer
+     * @param xPicked
+     * @param yPicked
+     * @param zPicked
+     */
+    void setPickedCoordinates(int xPicked, int yPicked, int zPicked);
+    
+    /**
+     * \brief Set the volume Data to display
+     * @param volumeData
+     */
+    void setVolumeData(vtkSmartPointer<vtkImageData> volumeData);
+    
+    /**
+     * \brief Returns the picked coordinates 
+     * @return std::vector containing xPicked, yPicke and zPicked
+     */
+    std::vector<int>* getPickedCoordinates();
+    
+    /**
+     * Connects the widget with a VolumeSegmentationWudget.h
+     * @param volumeSegmentation
+     */
+    void connectWithVolumeSegmentation(VolumeSegmentationWidget* volumeSegmentation);
     
 private:
     
@@ -57,9 +85,18 @@ private:
 	Widget that displays the coronal view of the 3D image
 	**/
 	QVTKVolumeSliceWidget * coronalDisplayWidget;
+        
+        std::vector<int> * pickedCoordinates; ///< PickedCoordinates with the mouse
+        
+        vtkSmartPointer<vtkEventQtSlotConnect> axialConnections; ///<Connector for the axial viewer
+        
+        vtkSmartPointer<vtkEventQtSlotConnect> sagittalConnections; ///<Connector for the sagittal viewer
+        
+        vtkSmartPointer<vtkEventQtSlotConnect> coronalConnections; ///<Connector for the coronal viewer
+
 	
 private slots:
-
+    
 	/**
 	indicate the slice to display with the axialDisplayWidget depending on the position
 	of the axialSlider
@@ -77,6 +114,52 @@ private slots:
 	of the coronalSlider
 	**/
     void coronalSliderMove(int);
+    
+    /**
+     * \brief Rotate the axialView camera
+     */
+    void axialRotate();
+    
+    /**
+     * \brief Flip the axialView image horizontally
+     */
+    void axialHorizontalFlip();
+    
+     /**
+     * \brief Flip the axialView image vertically
+     */
+    void axialVerticalFlip();
+    
+    /**
+     * \brief Rotate the sagittalView camera
+     */
+    void sagittalRotate();
+    
+    /**
+     * \brief Flip the asagittalView image horizontally
+     */
+    void sagittalHorizontalFlip();
+    
+    /**
+     * \brief Flip the sagittalView image vertically
+     */
+    void sagittalVerticalFlip();
+    
+    /**
+     * \brief Rotate the coronalView camera
+     */
+    void coronalRotate();
+    
+    /**
+     * \brief Flip the coronalView image horizontally
+     */
+    void coronalHorizontalFlip();
+    
+    /**
+     * \brief Flip the coronalView image vertically
+     */
+    void coronalVerticalFlip();
+    
 };
 
 #endif // VTKTHREEVIEWS_H

@@ -17,6 +17,8 @@ void SegmentationIntensityAndTextureImages<TInputImage>::setInput(ImageType* ima
     normalizeFilter->Update();   
     
     this->inputImage = normalizeFilter->GetOutput();
+    
+    this->timeStep = 0.125;
 }
 
 template<class TInputImage>
@@ -33,7 +35,7 @@ typename TInputImage::Pointer SegmentationIntensityAndTextureImages<TInputImage>
     typename AnisotropicFilterType::Pointer anisotropicFilter = AnisotropicFilterType::New();
     anisotropicFilter->SetInput(equalizationFilter->GetOutput());
     anisotropicFilter->SetNumberOfIterations(25);
-    anisotropicFilter->SetTimeStep(0.125);
+    anisotropicFilter->SetTimeStep(timeStep);
     anisotropicFilter->SetConductanceParameter(3);
     anisotropicFilter->Update();
     
@@ -70,5 +72,11 @@ typename TInputImage::Pointer SegmentationIntensityAndTextureImages<TInputImage>
     
     return normalizeFilter->GetOutput();
     
+}
+
+template<class TInputImage>
+void SegmentationIntensityAndTextureImages<TInputImage>::setTimeStep(float timeStep)
+{
+    this->timeStep = timeStep;
 }
 #endif

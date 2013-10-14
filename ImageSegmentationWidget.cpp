@@ -116,7 +116,7 @@ void ImageSegmentationWidget::loadTextureProbs()
 void ImageSegmentationWidget::computeProbability()
 {
 
-	this->imageSegmentation->computeProbabilityImage();
+    this->imageSegmentation->computeProbabilityImage();
 
     this->vtkProbabilityImage = imageSegmentation->getProbabilityImage();
     
@@ -131,12 +131,13 @@ void ImageSegmentationWidget::computeProbability()
 
 void ImageSegmentationWidget::segment()
 {
+    this->imageSegmentation->setSeed(seedPoint);
 
-	this->imageSegmentation->computeRegionGrowing();
+    this->imageSegmentation->computeRegionGrowing();
 
-	this->vtkRegionGrowingImage = imageSegmentation->getRegionGrowingImage();
-    this->vtkContourImage = imageSegmentation->getContourImage(); 
-	this->contourPixels = imageSegmentation->getContourPixels();
+    this->vtkRegionGrowingImage = imageSegmentation->getRegionGrowingImage();
+    this->vtkContourImage = imageSegmentation->getContourImage();
+    this->contourPixels = imageSegmentation->getContourPixels();
     
     this->displayWidget->setAndDisplayImage(vtkContourImage);
     
@@ -267,4 +268,5 @@ void ImageSegmentationWidget::newSeed()
     
     ui->segmentBtn->setEnabled(false);
     ui->saveBtn->setEnabled(false);
+    
 }

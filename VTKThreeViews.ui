@@ -6,30 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1050</width>
-    <height>367</height>
+    <width>1449</width>
+    <height>525</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>VTKThreeViews</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
-   <item>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QWidget" name="axialDisplay" native="true"/>
-     </item>
-     <item row="1" column="0">
-      <widget class="QSlider" name="axialSlider">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QGridLayout" name="gridLayout_2">
+  <layout class="QGridLayout" name="gridLayout_4">
+   <item row="0" column="1">
+    <layout class="QGridLayout" name="gridLayout_2" rowstretch="90,0,0">
      <item row="0" column="0">
       <widget class="QWidget" name="sagittalDisplay" native="true"/>
      </item>
@@ -40,10 +26,35 @@
        </property>
       </widget>
      </item>
+     <item row="2" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <item>
+        <widget class="QPushButton" name="sagittalRotateBtn">
+         <property name="text">
+          <string>Rotate</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="sagittalHorizontalBtn">
+         <property name="text">
+          <string>Horizontal Flip</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="sagittalVerticalBtn">
+         <property name="text">
+          <string>Vertical Flip</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
     </layout>
    </item>
-   <item>
-    <layout class="QGridLayout" name="gridLayout_3">
+   <item row="0" column="2">
+    <layout class="QGridLayout" name="gridLayout_3" rowstretch="90,5,5">
      <item row="0" column="0">
       <widget class="QWidget" name="coronalDisplay" native="true"/>
      </item>
@@ -53,6 +64,82 @@
         <enum>Qt::Horizontal</enum>
        </property>
       </widget>
+     </item>
+     <item row="2" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_8">
+       <item>
+        <widget class="QPushButton" name="coronalRotateBtn">
+         <property name="text">
+          <string>Rotate</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="coronalHorizontalBtn">
+         <property name="text">
+          <string>Horizontal Flip</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="coronalVerticalBtn">
+         <property name="text">
+          <string>Vertical Flip</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout" rowstretch="90,5,5" rowminimumheight="0,0,0">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetDefaultConstraint</enum>
+     </property>
+     <item row="0" column="0">
+      <widget class="QWidget" name="axialDisplay" native="true"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QSlider" name="axialSlider">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetMinAndMaxSize</enum>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QPushButton" name="axialRotateBtn">
+         <property name="text">
+          <string>Rotate</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="axialHorizontalBtn">
+         <property name="text">
+          <string>Horizontal Flip</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="axialVerticalBtn">
+         <property name="text">
+          <string>Vertical Flip</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>
@@ -68,8 +155,8 @@
    <slot>axialSliderMove(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>270</x>
-     <y>425</y>
+     <x>282</x>
+     <y>461</y>
     </hint>
     <hint type="destinationlabel">
      <x>276</x>
@@ -84,8 +171,8 @@
    <slot>sagittalSliderMove(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>540</x>
-     <y>427</y>
+     <x>958</x>
+     <y>467</y>
     </hint>
     <hint type="destinationlabel">
      <x>542</x>
@@ -100,12 +187,156 @@
    <slot>coronalSliderMove(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>990</x>
-     <y>425</y>
+     <x>1436</x>
+     <y>467</y>
     </hint>
     <hint type="destinationlabel">
      <x>990</x>
      <y>442</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>axialRotateBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>VTKThreeViews</receiver>
+   <slot>axialRotate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>33</x>
+     <y>493</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>501</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>axialHorizontalBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>VTKThreeViews</receiver>
+   <slot>axialHorizontalFlip()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>231</x>
+     <y>499</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>228</x>
+     <y>519</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>axialVerticalBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>VTKThreeViews</receiver>
+   <slot>axialVerticalFlip()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>377</x>
+     <y>498</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>371</x>
+     <y>516</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sagittalRotateBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>VTKThreeViews</receiver>
+   <slot>sagittalRotate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>582</x>
+     <y>501</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>553</x>
+     <y>516</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sagittalHorizontalBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>VTKThreeViews</receiver>
+   <slot>sagittalHorizontalFlip()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>743</x>
+     <y>498</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>694</x>
+     <y>518</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sagittalVerticalBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>VTKThreeViews</receiver>
+   <slot>sagittalVerticalFlip()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>836</x>
+     <y>495</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>811</x>
+     <y>520</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>coronalRotateBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>VTKThreeViews</receiver>
+   <slot>coronalRotate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1064</x>
+     <y>496</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1037</x>
+     <y>516</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>coronalHorizontalBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>VTKThreeViews</receiver>
+   <slot>coronalHorizontalFlip()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1224</x>
+     <y>493</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1156</x>
+     <y>518</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>coronalVerticalBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>VTKThreeViews</receiver>
+   <slot>coronalVerticalFlip()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1330</x>
+     <y>494</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1301</x>
+     <y>519</y>
     </hint>
    </hints>
   </connection>
@@ -114,5 +345,14 @@
   <slot>axialSliderMove(int)</slot>
   <slot>sagittalSliderMove(int)</slot>
   <slot>coronalSliderMove(int)</slot>
+  <slot>axialRotate()</slot>
+  <slot>coronalRotate()</slot>
+  <slot>sagittalRotate()</slot>
+  <slot>axialHorizontalFlip()</slot>
+  <slot>coronalHorizontalFlip()</slot>
+  <slot>sagittalHorizontalFlip()</slot>
+  <slot>axialVerticalFlip()</slot>
+  <slot>coronalVerticalFlip()</slot>
+  <slot>sagittalVerticalFlip()</slot>
  </slots>
 </ui>

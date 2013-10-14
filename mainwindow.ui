@@ -125,6 +125,7 @@
      </property>
      <addaction name="actionSegmentation_Training"/>
      <addaction name="actionSegment_Image"/>
+     <addaction name="actionSegment_Volume"/>
     </widget>
     <addaction name="actionCrop_Images"/>
     <addaction name="menuUS_Probe_Calibration"/>
@@ -198,6 +199,11 @@
   <action name="actionSegment_Image">
    <property name="text">
     <string>Segment Image</string>
+   </property>
+  </action>
+  <action name="actionSegment_Volume">
+   <property name="text">
+    <string>Segment Volume</string>
    </property>
   </action>
  </widget>
@@ -412,6 +418,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionSegment_Volume</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>segmentVolume()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>330</x>
+     <y>329</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>addImages()</slot>
@@ -428,5 +450,6 @@
   <slot>pivotCalibration()</slot>
   <slot>segmentationTraining()</slot>
   <slot>segmentImage()</slot>
+  <slot>segmentVolume()</slot>
  </slots>
 </ui>

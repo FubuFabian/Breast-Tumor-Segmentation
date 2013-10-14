@@ -8,6 +8,8 @@
 #include "PivotCalibration.h"
 #include "SegmentationTrainingWidget.h"
 #include "ImageSegmentationWidget.h"
+#include "VolumeSegmentationWidget.h"
+#include "VTKThreeViews.h"
 
 #include <QVBoxLayout>
 #include <vtkEventQtSlotConnect.h>
@@ -33,7 +35,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
   Connections = vtkSmartPointer<vtkEventQtSlotConnect>::New();
   
   this->imageLoaded = false;
-
 }
 
 MainWindow::~MainWindow()
@@ -316,6 +317,7 @@ void MainWindow::segmentImage()
         
         imageSegmentationWidget->setMainWindow(this);
         imageSegmentationWidget->show();
+        
     }else
     {
       QErrorMessage errorMessage;
@@ -323,10 +325,45 @@ void MainWindow::segmentImage()
 		  "No images loaded, </ br> please load a image before segmentation");
       errorMessage.exec();
     }
-        
-      
-             
 
+}
+
+void MainWindow::segmentVolume()
+{
+    std::cout<<"Segmentation for 2D images"<<std::endl<<std::endl;
+    
+    
+    if(displayWidget->getVolumeLoaded())
+    {
+        VolumeSegmentationWidget * volumeSegmentationWidget = new VolumeSegmentationWidget();
+        
+        volumeSegmentationWidget->setVolume(displayWidget->getVolume());
+        VTKThreeViews* threeViews = displayWidget->getVTKThreeViews();
+        
+        threeViews->connectWithVolumeSegmentation(volumeSegmentationWidget);
+        volumeSegmentationWidget->setVTKThreeViews(threeViews);
+        
+        volumeSegmentationWidget->setMainWindow(this);
+        volumeSegmentationWidget->show();
+        
+        
+//        displayWidget->setPickerFlag();
+//        imageSegmentationWidget->setImage(displayWidget->getImageViewer()->GetInput());
+//        
+//        Connections->Connect(displayWidget->getQVTKWidget()->GetRenderWindow()->GetInteractor(),
+//                           vtkCommand::LeftButtonPressEvent,
+//                           imageSegmentationWidget,
+//                           SLOT(getCoordinates()));
+//        
+//        imageSegmentationWidget->setMainWindow(this);
+//        imageSegmentationWidget->show();
+    }else
+    {
+      QErrorMessage errorMessage;
+      errorMessage.showMessage(
+		  "No images loaded, </ br> please load a image before segmentation");
+      errorMessage.exec();
+    }
 
 }
 
@@ -357,4 +394,3 @@ void MainWindow::print()
 {
   this->addLogText("estoy cachando el evento");
 }
-

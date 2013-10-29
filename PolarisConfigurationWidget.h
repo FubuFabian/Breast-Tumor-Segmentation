@@ -44,17 +44,6 @@ private:
     
 	Ui::PolarisConfigurationWidget *ui; ///<Tge user interface
 
-	QString referenceRomFile; ///<String with the rom filename of the reference
-	QString probeRomFile; ///<String with the rom filename of the us probe
-	QString needleRomFile; ///<String with the rom filename of the needle
-	QString pointerRomFile; ///<String with the rom filename of the pointer
-
-	QString probeCalibrationFile; ///<String with the calibration filename of the us probe
-	QString needleCalibrationFile; ///<String with the calibration filename of the needle
-	QString pointerCalibrationFile; ///<String with the calibration filename of the pointer
-
-	int port;
-
 	bool quit;
 
 private slots:
@@ -80,8 +69,14 @@ private slots:
 	/** \brief Choose the pointer calibration file */
     void choosePointerCalibration();
 
-	/** \brief configuration ok and close the widget */
-	void ok();
+        /** \brief configuration ok and close the widget */
+    void ok();
+    
+        /** \brief load polaris configuration file */
+    void loadConfig();
+    
+        /** \brief save polaris configuration file */
+    void saveConfig();
 };
 
 #endif // POLARISCONFIGURATIONWIDGET_H

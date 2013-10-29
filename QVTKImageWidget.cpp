@@ -257,6 +257,7 @@ void QVTKImageWidget::setAndDisplayVolumeImages(QStringList imageFilenames, QStr
 
 	std::cout<<std::endl;
 	std::cout<<"Loading Translation Data"<<std::endl;
+        
      if (!translationFilename.isEmpty())
      {
 
@@ -412,7 +413,7 @@ void QVTKImageWidget::setAndDisplayVolume(vtkSmartPointer<vtkImageData> volumeDa
     volume->SetProperty(volumeProperty);
     volume->Update();
 
-    threeViews->setVolumeData(volumeData);
+    threeViews->setVolumeData(this->volumeData);
     threeViews->show();
 
     propertiesChanger->show();

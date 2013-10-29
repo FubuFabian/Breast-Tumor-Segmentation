@@ -391,7 +391,7 @@ void ProbeCalibrationWidget::saveCalibration()
 	out<<calibrationParameters[7]<<"\n";
 	out<<calibrationParameters[8]<<"\n";
 	out<<calibrationParameters[9]<<"\n";
-	out<<calibrationParameters[10]<<"\n";
+	out<<calibrationParameters[10];
 
 	file.close();
 
